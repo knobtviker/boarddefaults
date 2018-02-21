@@ -1,4 +1,4 @@
-package com.knobtviker.android.things.contrib.boards;
+package com.knobtviker.android.things.contrib.community.boards;
 
 import android.os.Build;
 import android.support.annotation.Nullable;
