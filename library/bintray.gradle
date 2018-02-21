@@ -1,0 +1,51 @@
+apply plugin: 'com.jfrog.bintray'
+
+version = android.defaultConfig.versionName
+
+task sourcesJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    classifier = 'sources'
+}
+
+task javadoc(type: Javadoc) {
+    source = android.sourceSets.main.java.srcDirs
+    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+artifacts {
+    archives javadocJar
+    archives sourcesJar
+}
+
+// Bintray
+Properties properties = new Properties()
+properties.load(new FileInputStream(file(rootProject.file('local.properties'))))
+
+bintray {
+    user = properties.getProperty("bintray.user")
+    key = properties.getProperty("bintray.apikey")
+
+    pkg {
+        repo = 'maven'
+        name = 'boards'
+        desc = 'Android Things Board Defaults'
+        websiteUrl = 'https://github.com/knobtviker/boarddefaults'
+        vcsUrl = 'https://github.com/knobtviker/boarddefaults.git'
+        licenses = ['MIT']
+        version {
+            name = android.defaultConfig.versionName
+            gpg {
+                sign = true
+                passphrase = properties.getProperty("bintray.gpg_passphrase")
+            }
+        }
+        publish = true
+        publicDownloadNumbers = true
+    }
+
+    configurations = ['archives']
+}

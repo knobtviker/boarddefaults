@@ -16,10 +16,12 @@ android {
             minifyEnabled false
         }
     }
-
 }
 
 dependencies {
     compileOnly 'com.google.android.things:androidthings:0.6.1-devpreview'
     implementation 'com.android.support:support-annotations:27.0.2'
 }
+
+apply from: 'install.gradle'
+apply from: 'bintray.gradle'
