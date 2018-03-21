@@ -63,7 +63,7 @@ public class BoardDefaults {
     /**
      * Returns a list of I2C buses on the board.
      */
-    public List<String> i2CBuses() {
+    public static List<String> i2CBuses() {
         final PeripheralManager peripheralManager = PeripheralManager.getInstance();
         return peripheralManager.getI2cBusList();
     }
@@ -71,7 +71,7 @@ public class BoardDefaults {
     /**
      * Returns a list of I2C all devices connected to all I2C buses on the board.
      */
-    public List<I2CDevice> i2CDevices() {
+    public static List<I2CDevice> i2CDevices() {
         final List<I2CDevice> devices = new ArrayList<>();
 
         i2CBuses()
@@ -106,7 +106,7 @@ public class BoardDefaults {
      * Returns true or false if I2C device is connected on specific I2C bus on the board.
      * Throws exception if address is out of range.
      */
-    public boolean isI2CDeviceConnected(@NonNull final String bus, @I2CAddress final int address) throws IOException {
+    public static boolean isI2CDeviceConnected(@NonNull final String bus, @I2CAddress final int address) throws IOException {
         if (address >= I2C_MIN_ADDRESS && address <= I2C_MAX_ADDRESS) {
             return phantomWrite(bus, address);
         } else {
@@ -114,7 +114,7 @@ public class BoardDefaults {
         }
     }
 
-    private boolean phantomWrite(@NonNull final String bus, @I2CAddress final int address) throws IOException {
+    private static boolean phantomWrite(@NonNull final String bus, @I2CAddress final int address) throws IOException {
         final PeripheralManager peripheralManager = PeripheralManager.getInstance();
         final I2cDevice i2cDevice = peripheralManager.openI2cDevice(bus, address);
         boolean isConnected = false;
