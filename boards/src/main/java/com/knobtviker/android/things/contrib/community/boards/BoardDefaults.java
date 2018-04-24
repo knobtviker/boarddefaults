@@ -1,9 +1,11 @@
 package com.knobtviker.android.things.contrib.community.boards;
 
+import android.Manifest;
 import android.os.Build;
 import android.support.annotation.IntRange;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresPermission;
 import android.util.Log;
 
 import com.google.android.things.pio.I2cDevice;
@@ -114,6 +116,7 @@ public class BoardDefaults {
         }
     }
 
+    @RequiresPermission("com.google.android.things.permission.USE_PERIPHERAL_IO")
     private static boolean phantomWrite(@NonNull final String bus, @I2CAddress final int address) throws IOException {
         final PeripheralManager peripheralManager = PeripheralManager.getInstance();
         final I2cDevice i2cDevice = peripheralManager.openI2cDevice(bus, address);
