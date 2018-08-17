@@ -1,8 +1,10 @@
-package com.knobtviker.android.things.contrib.community.boards;
+package com.knobtviker.android.things.contrib.community.boards.models.devices;
 
 import android.support.annotation.NonNull;
 
-public class I2CDevice {
+import com.knobtviker.android.things.contrib.community.boards.models.base.PortDevice;
+
+public class I2CDevice implements PortDevice {
 
     public I2CDevice(@NonNull final String bus, final int address, @NonNull final String addressHex) {
         this.bus = bus;

@@ -1,13 +1,13 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 27
+    compileSdkVersion 28
 
     defaultConfig {
         minSdkVersion 27
-        targetSdkVersion 27
-        versionCode 7
-        versionName "1.0.7"
+        targetSdkVersion 28
+        versionCode 8
+        versionName "1.0.8"
 
     }
 
@@ -25,6 +25,7 @@ android {
 dependencies {
     compileOnly 'com.google.android.things:androidthings:1.0'
     implementation 'com.android.support:support-annotations:27.1.1'
+    implementation 'com.jakewharton.timber:timber:4.7.1'
 }
 
 apply from: 'install.gradle'
