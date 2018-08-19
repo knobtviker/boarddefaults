@@ -3,7 +3,6 @@ package com.knobtviker.android.things.contrib.community.boards.models.ports;
 import android.support.annotation.NonNull;
 
 import com.knobtviker.android.things.contrib.community.boards.models.base.Port;
-import com.knobtviker.android.things.contrib.community.boards.models.devices.I2CDevice;
 
 import java.util.Collections;
 import java.util.List;
@@ -35,10 +34,5 @@ public class UART implements Port {
     @Override
     public List<String> all() {
         return all;
-    }
-
-    @Override
-    public List<I2CDevice> devices() {
-        return Collections.emptyList();
     }
 }

@@ -64,7 +64,7 @@ public class BoardDefaults {
                 return Device.create(
                     "Raspberry",
                     "Pi 3",
-                    I2C.create(primaryI2C(), allI2C(), devicesI2C()),
+                    I2C.create(primaryI2C(), allI2C()),
                     SPI.create(primarySPI(), allSPI()),
                     PWM.create(primaryPWM(), allPWM()),
                     UART.create(primaryUART(), allUART())
@@ -73,7 +73,7 @@ public class BoardDefaults {
                 return Device.create(
                     "Pico Pi",
                     "i.MX6UL",
-                    I2C.create(primaryI2C(), allI2C(), devicesI2C()),
+                    I2C.create(primaryI2C(), allI2C()),
                     SPI.create(primarySPI(), allSPI()),
                     PWM.create(primaryPWM(), allPWM()),
                     UART.create(primaryUART(), allUART())
@@ -82,7 +82,7 @@ public class BoardDefaults {
                 return Device.create(
                     "Pico Pi",
                     "i.MX7D",
-                    I2C.create(primaryI2C(), allI2C(), devicesI2C()),
+                    I2C.create(primaryI2C(), allI2C()),
                     SPI.create(primarySPI(), allSPI()),
                     PWM.create(primaryPWM(), allPWM()),
                     UART.create(primaryUART(), allUART())
@@ -186,10 +186,11 @@ public class BoardDefaults {
     /**
      * Returns a list of I2C all devices connected to all I2C buses on the board.
      */
-    private List<I2CDevice> devicesI2C() {
+    public static List<I2CDevice> devicesI2C() {
         final List<I2CDevice> devices = new ArrayList<>();
 
-        allI2C()
+        final PeripheralManager peripheralManager = PeripheralManager.getInstance();
+        peripheralManager.getI2cBusList()
             .forEach(
                 i2CBus ->
                     IntStream
@@ -230,7 +231,7 @@ public class BoardDefaults {
     }
 
     @RequiresPermission("com.google.android.things.permission.USE_PERIPHERAL_IO")
-    private boolean phantomWrite(@NonNull final String bus, @I2CAddress final int address) throws IOException {
+    private static boolean phantomWrite(@NonNull final String bus, @I2CAddress final int address) throws IOException {
         final PeripheralManager peripheralManager = PeripheralManager.getInstance();
         final I2cDevice i2cDevice = peripheralManager.openI2cDevice(bus, address);
         boolean isConnected = false;

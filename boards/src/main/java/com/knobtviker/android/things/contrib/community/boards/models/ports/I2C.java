@@ -16,19 +16,15 @@ public class I2C implements Port {
     @NonNull
     private final List<String> all;
 
-    @NonNull
-    private final List<I2CDevice> devices;
+    public static I2C NONE = create("", Collections.emptyList());
 
-    public static I2C NONE = create("", Collections.emptyList(), Collections.emptyList());
-
-    public static I2C create(@NonNull final String primary, @NonNull final List<String> all, @NonNull final List<I2CDevice> devices) {
-        return new I2C(primary, all, devices);
+    public static I2C create(@NonNull final String primary, @NonNull final List<String> all) {
+        return new I2C(primary, all);
     }
 
-    private I2C(@NonNull final String primary, @NonNull final List<String> all, @NonNull final List<I2CDevice> devices) {
+    private I2C(@NonNull final String primary, @NonNull final List<String> all) {
         this.primary = primary;
         this.all = all;
-        this.devices = devices;
     }
 
     @Override
@@ -39,10 +35,5 @@ public class I2C implements Port {
     @Override
     public List<String> all() {
         return all;
-    }
-
-    @Override
-    public List<I2CDevice> devices() {
-        return devices;
     }
 }
